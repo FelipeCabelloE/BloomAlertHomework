@@ -37,7 +37,6 @@ export const getServerSideProps = (async () => {
 
 export default function HomePage({repo,}:InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [value, setValue] = useState<null | EventProps>(null);
-  const mapboxToken = 'pk.eyJ1IjoiZXhlcnQwODMiLCJhIjoiY2x2OGFuM2duMGo4czJqbXViamFwM2lqdyJ9.tXiF2I5Gr_oR0BI0s6A9yA';
   return (
     <main className="mx-auto max-w-4xl px-4 pt-8">
 
