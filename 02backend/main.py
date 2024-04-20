@@ -67,7 +67,10 @@ async def timeseries_data(organization: str, variable:str):
     df = df.dropna()
 
     db.close()
-    return {'data':{'timestamps': df['timestamp'].values.tolist(), 'values' : df['value'].values.tolist() }}
+    data = df[['timestamp', 'value']].to_dict('records')
+    formatted_data = [{'date': str(record['timestamp'].date()), 'value': record['value']} for record in data]
+
+    return formatted_data
 
 
 @app.get('/organizationdata/{organization}')
