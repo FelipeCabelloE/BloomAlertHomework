@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import Link from "next/link";
-import { AreaChart, Card, EventProps, SearchSelect, SearchSelectItem } from "@tremor/react";
+import { AreaChart, Card, EventProps, SearchSelect, SearchSelectItem, Divider } from "@tremor/react";
 import React, { useRef, useEffect, useState } from 'react';
 import Map from "../components/Maps";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -47,11 +47,10 @@ export default function HomePage() {
         Welcome to your Dashboard<br/> 
         </h2>
         <div className="mb-4 mt-0 text-left font-mono text-sm text-slate-500">
-        by Bloom alert & Felipe Cabello
+        by Bloom alert & Felipe Cabello<br /> Created using: Fastapi, Nextjs, Duckdb
       </div>
-      <div className="mb-4 mt-2 text-left font-mono text-sm text-slate-500">
-        Created using: Fastapi, Nextjs, Duckdb
-      </div>
+      <Divider> </Divider>
+
       </div>
 
       <div className="mb-4 mt-8 text-center font-mono text-sm text-slate-500">
@@ -65,6 +64,7 @@ export default function HomePage() {
 
       <div className="mt-12">
         <Card>
+        <h3 className="text-tremor-default text-tremor-content dark:text-dark-tremor-content">CHL-01</h3>
           <AreaChart
             data={repo[0]}
             index="date"
@@ -75,6 +75,7 @@ export default function HomePage() {
       </div>
       <div className="mt-12">
         <Card>
+        <h3 className="text-tremor-default text-tremor-content dark:text-dark-tremor-content">SPM-01</h3>
           <AreaChart
             data={repo[1]}
             index="date"

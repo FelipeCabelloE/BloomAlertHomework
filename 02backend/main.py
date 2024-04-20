@@ -68,7 +68,7 @@ async def timeseries_data(organization: str, variable:str):
 
     db.close()
     data = df[['timestamp', 'value']].to_dict('records')
-    formatted_data = [{'date': str(record['timestamp'].date()), 'value': record['value']} for record in data]
+    formatted_data = [{'date': str(record['timestamp'].date()), 'value': round(record['value'],3)} for record in data]
 
     return formatted_data
 
