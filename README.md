@@ -23,10 +23,13 @@ It is a Dashboard app that ingest data from a database and showcases timeseries 
 **03Frontend** <- Contains the NextJS code necesary for deploying the frontend.
 
 
+
+
 ## Usage
 
 Just select one of the two organizations and examine the data.
 
+**Important** There is a map in the app that needs and environmental variable to work properly. If you want to use it please provide your google maps api key here(should be in line 44): "03frontend/components/Maps.js"
 
 
 # Getting started
@@ -48,7 +51,7 @@ Open two terminals, one for the front end, another for the backend
 
 ### Backend
 
-1. For the backend, go to the **02backend** folder and run "python3 -m venv" this should create a virtual environment.
+1. For the backend, go to the **02backend** folder and run "python3 -m venv venv" this should create a virtual environment.
 
 2. With your virtual environment created, from the same folder, run "source venv/bin/activate".
 
@@ -62,7 +65,7 @@ Open two terminals, one for the front end, another for the backend
 
 2. With nextjs installed. Run "npm install"
 
-3. Now run "npm run dev"
+3. Now run "npm run dev". The frontend should be running in http://localhost:3000
 
 
 ### Your app is running
