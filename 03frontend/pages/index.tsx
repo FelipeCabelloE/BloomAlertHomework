@@ -104,7 +104,7 @@ export default function HomePage() {
       </div>
       <div className="mt-12">
         <Card>
-          <Map />
+          <Map polygonData={repo[2]?.polygon_decoded || []}/>
         </Card>
       </div>
     </main>
