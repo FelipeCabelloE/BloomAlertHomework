@@ -26,7 +26,7 @@ app.add_middleware(
 )
 
 
-def get_timeseries_subset(db_conn, variable, organization, start_time, end_time):
+def get_timeseries_subset_bytimestamp(db_conn, variable, organization, start_time, end_time):
     query = """
         SELECT value, timestamp
         FROM timeseries_dataset
@@ -42,21 +42,45 @@ def get_timeseries_subset(db_conn, variable, organization, start_time, end_time)
                                      end_time]).fetchdf()
     return result
 
+def get_timeseries_subset(db_conn, variable, organization):
+    query = """
+        SELECT value, timestamp
+        FROM timeseries_dataset
+        WHERE variable = ?
+          AND organization = ?
+        ORDER BY timestamp;
+    """
+    
+    result = db_conn.execute(query, [variable, 
+                                     organization]).fetchdf()
+    return result
 
 
 
-@app.get('/')
-def read_root():
+
+@app.get('/timeseriesdata/{organization}/{variable}')
+def timeseries_data(organization: str, variable:str):
     db = duckdb.connect()
 
     db.execute(f"IMPORT DATABASE '{file_path}'")
-    df = get_timeseries_subset(db, 'CHL-01', 'adasa', datetime(2023, 12, 1),datetime(2024, 12, 1))
+    df = get_timeseries_subset(db, variable, organization)
     df = df.dropna()
 
     db.close()
-    return {'data':df['timestamp'].values.tolist()}
+    return {'data':{'timestamps': df['timestamp'].values.tolist(), 'values' : df['value'].values.tolist() }}
 
 
-@app.get('/edt')
-def notas():
-    return {'promedio de notas':'7.0'}
+@app.get('/organizationdata/{organization}')
+def organization_metrics(organization: str):
+        db = duckdb.connect()
+
+        db.execute(f"IMPORT DATABASE '{file_path}'")
+        df = db.execute("""
+        SELECT *
+        FROM companies
+        WHERE organization = ?
+        """, [organization]).fetchdf()
+
+        db.close()
+        
+        return {column_name : df[column_name].values.tolist() for column_name in df.columns.tolist()}
