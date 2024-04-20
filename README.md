@@ -1,4 +1,34 @@
-# BloomAlertHomework
+# Welcome to BloomAlertHomework
+
+This is a fullstack project created for BloomAlert. It uses mainly open source tecnologies such as:
+- Fastapi as backend
+- Duckdb as a database
+- Nextjs and react as a front end.
+
+It is a Dashboard app that ingest data from a databases and showcases timeseries mesurements.
+
+
+![alt text](image.png)
+
+
+## Project structure
+
+
+**00docs** <- Contains the instructions for the creation of this proyect
+
+**01data** <- Contains both the original (raw) and ingested data by duckdb (interim), it also contains some exploratory data analysis using both pandas and duckdb.
+
+**02backend** <- Contains the requirements for deploying the backend and the necesary packages for performing the exploratory data anlysis.
+
+**03Frontend** <- Contains the NextJS code necesary for deploying the frontend.
+
+
+
+# Getting started
+
+
+
+
 
 A Bloom Alert Homework repository
 
