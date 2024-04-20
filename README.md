@@ -36,8 +36,37 @@ If you want to run this proyect you need:
 - Python3 (Here I used Python 3.12.2)
 - NextJS 14
 
+Please follow the official instructions for installing nextjs, and at least use a python virtual environment.
 
 The project was tested using a Fedora Linux 39.20240418 machine(Bluefin-dx)
+
+## Installation
+
+Clone the proyect.
+
+Open two terminals, one for the front end, another for the backend
+
+### Backend
+
+1. For the backend, go to the **02backend** folder and run "python3 -m venv" this should create a virtual environment.
+
+2. With your virtual environment created, from the same folder, run "source venv/bin/activate".
+
+3. With your virtual environment activated run "pip install -r requirements.txt"
+
+4. Once the packages are installed, run " uvicorn main:app --reload" to start the server. You should be able to navigate to http://127.0.0.1:8000/docs and look at the exposed endpoints.
+
+### Frontend
+
+1. With the other terminal go to **03Frontend**
+
+2. With nextjs installed. Run "npm install"
+
+3. Now run "npm run dev"
+
+
+### Your app is running
+Congratulations! You are running a modern fullstack app.
 
 
 
