@@ -13,19 +13,21 @@ interface DataPoint {
   value: number;
 }
 
-type DataPointList = DataPoint[];
+type DataPointList = [DataPoint[], DataPoint[]];
 
 export default function HomePage() {
   const [value, setValue] = useState<null | EventProps>(null);
   const [selectedValue, setSelectedValue] = useState<string>('adasa/CHL-01');
-  const [repo, setRepo] = useState<DataPointList>([]);
+  const [repo, setRepo] = useState<DataPointList>([[],[]]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res_chl01 = await fetch(`http://127.0.0.1:8000/timeseriesdata/${selectedValue}/CHL-01`);
-        const data_chl01: DataPointList = await res_chl01.json();
-        setRepo(data_chl01);
+        const data_chl01: DataPoint[] = await res_chl01.json();
+        const res_spm01 = await fetch(`http://127.0.0.1:8000/timeseriesdata/${selectedValue}/SPM-01`);
+        const data_spm01: DataPoint[] = await res_spm01.json();
+        setRepo([data_chl01, data_spm01]);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -64,15 +66,24 @@ export default function HomePage() {
       <div className="mt-12">
         <Card>
           <AreaChart
-            data={repo}
+            data={repo[0]}
             index="date"
             categories={["value"]}
             onValueChange={(v: EventProps) => setValue(v)}
           />
         </Card>
       </div>
-
-      <div>
+      <div className="mt-12">
+        <Card>
+          <AreaChart
+            data={repo[1]}
+            index="date"
+            categories={["value"]}
+            onValueChange={(v: EventProps) => setValue(v)}
+          />
+        </Card>
+      </div>
+      <div className="mt-12">
         <Card>
           <Map />
         </Card>
