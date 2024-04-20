@@ -23,9 +23,9 @@ export default function HomePage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`http://127.0.0.1:8000/timeseriesdata/${selectedValue}/CHL-01`);
-        const data: DataPointList = await res.json();
-        setRepo(data);
+        const res_chl01 = await fetch(`http://127.0.0.1:8000/timeseriesdata/${selectedValue}/CHL-01`);
+        const data_chl01: DataPointList = await res_chl01.json();
+        setRepo(data_chl01);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -42,18 +42,23 @@ export default function HomePage() {
     <main className="mx-auto max-w-4xl px-4 pt-8">
       <div className="mx-auto max-w-2xl lg:mx-0 pt-4">
         <h2 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-6xl">
-          Area chart
+        Welcome to your Dashboard<br/> 
         </h2>
+        <div className="mb-4 mt-0 text-left font-mono text-sm text-slate-500">
+        by Bloom alert & Felipe Cabello
+      </div>
+      <div className="mb-4 mt-2 text-left font-mono text-sm text-slate-500">
+        Created using: Fastapi, Nextjs, Duckdb
+      </div>
       </div>
 
       <div className="mb-4 mt-8 text-center font-mono text-sm text-slate-500">
-        SearchSelect
+        Please, select your organization
       </div>
 
       <SearchSelect onValueChange={handleSelectChange} value={selectedValue}>
-        <SearchSelectItem value="adasa">adasa</SearchSelectItem>
-        <SearchSelectItem value="adasa/CHL-02">Option 2</SearchSelectItem>
-        <SearchSelectItem value="adasa/CHL-03">Option 3</SearchSelectItem>
+        <SearchSelectItem value="adasa">Adasa</SearchSelectItem>
+        <SearchSelectItem value="gsinima">Gsinima</SearchSelectItem>
       </SearchSelect>
 
       <div className="mt-12">
