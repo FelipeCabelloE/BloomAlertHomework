@@ -26,7 +26,7 @@ app.add_middleware(
 )
 
 
-def get_timeseries_subset_bytimestamp(db_conn, variable, organization, start_time, end_time):
+async def get_timeseries_subset_bytimestamp(db_conn, variable, organization, start_time, end_time):
     query = """
         SELECT value, timestamp
         FROM timeseries_dataset
@@ -42,7 +42,7 @@ def get_timeseries_subset_bytimestamp(db_conn, variable, organization, start_tim
                                      end_time]).fetchdf()
     return result
 
-def get_timeseries_subset(db_conn, variable, organization):
+async def get_timeseries_subset(db_conn, variable, organization):
     query = """
         SELECT value, timestamp
         FROM timeseries_dataset
@@ -59,11 +59,11 @@ def get_timeseries_subset(db_conn, variable, organization):
 
 
 @app.get('/timeseriesdata/{organization}/{variable}')
-def timeseries_data(organization: str, variable:str):
+async def timeseries_data(organization: str, variable:str):
     db = duckdb.connect()
 
     db.execute(f"IMPORT DATABASE '{file_path}'")
-    df = get_timeseries_subset(db, variable, organization)
+    df = await get_timeseries_subset(db, variable, organization)
     df = df.dropna()
 
     db.close()
@@ -71,7 +71,7 @@ def timeseries_data(organization: str, variable:str):
 
 
 @app.get('/organizationdata/{organization}')
-def organization_metrics(organization: str):
+async def organization_metrics(organization: str):
         db = duckdb.connect()
 
         db.execute(f"IMPORT DATABASE '{file_path}'")
