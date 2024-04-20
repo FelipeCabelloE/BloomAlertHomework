@@ -13,12 +13,28 @@ interface DataPoint {
   value: number;
 }
 
-type DataPointList = [DataPoint[], DataPoint[]];
+interface DataResponse {
+  organization: string[];
+  zone_id: number[];
+  zone: string[];
+  polygon_decoded: string[];
+  last7daysmean_CHL01: number[];
+  last7daysmean_SPM01: number[];
+  mean_CHL01: number[];
+  mean_SPM01: number[];
+  last7daysvar_CHL01: number[];
+  last7daysvar_SPM01: number[];
+  nullto_nonnull_CHL01: number[];
+  nullto_nonnull_SPM01: number[];
+}
+
+
+type DataPointList = [DataPoint[], DataPoint[], DataResponse];
 
 export default function HomePage() {
   const [value, setValue] = useState<null | EventProps>(null);
   const [selectedValue, setSelectedValue] = useState<string>('adasa/CHL-01');
-  const [repo, setRepo] = useState<DataPointList>([[],[]]);
+  const [repo, setRepo] = useState<DataPointList>([[],[],{} as DataResponse]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +43,9 @@ export default function HomePage() {
         const data_chl01: DataPoint[] = await res_chl01.json();
         const res_spm01 = await fetch(`http://127.0.0.1:8000/timeseriesdata/${selectedValue}/SPM-01`);
         const data_spm01: DataPoint[] = await res_spm01.json();
-        setRepo([data_chl01, data_spm01]);
+        const res_metrics = await fetch(`http://127.0.0.1:8000/organizationdata/${selectedValue}`);
+        const data_metrics: DataResponse = await res_metrics.json();
+        setRepo([data_chl01, data_spm01, data_metrics]);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
