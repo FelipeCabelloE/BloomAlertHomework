@@ -2,8 +2,8 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import { AreaChart, Card, EventProps } from "@tremor/react";
-import { useState } from "react";
-import Map, { NavigationControl, GeolocateControl } from "react-map-gl";
+import React, { useRef, useEffect, useState } from 'react';
+import Map from "../components/Maps";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 import classes from "./Page.module.css";
@@ -112,23 +112,8 @@ export default function HomePage() {
       </div>
       <div>
       <Card>
-      <Map mapboxAccessToken={mapboxToken}
+      <Map />
 
-				mapStyle="mapbox://styles/mapbox/streets-v12"
-
-				// style=mapbox://styles/mapbox/streets-v12
-
-				initialViewState={{ latitude: 35.668641, longitude: 139.750567, zoom: 10 }}
-
-				maxZoom={20}
-
-				minZoom={3}>
-
-				<GeolocateControl position="top-left" />
-
-				<NavigationControl position="top-left" />
-
-			</Map>
       </Card>
       </div>
 
