@@ -1,6 +1,6 @@
-# Welcome to BloomAlertHomework
+# Welcome to Duckdb-Fastapi-Nextjs-Dashboard-Example
 
-This is a fullstack project created for BloomAlert. It uses mainly open source tecnologies such as:
+This is a fullstack project created for Water data examination andAlert. It uses mainly open source tecnologies such as:
 - Fastapi as backend
 - Duckdb as a database
 - Nextjs and react as a front end.
@@ -101,7 +101,7 @@ The data is separated into two files, one represents the timeseries data and the
 
 **value** (FLOAT): valor medido de la variable en la estampa horaria.
 
-**ingestion_time** (TIMESTAMP): Estampa horaria que representa día en que se ingesto el dato a las bases de datos internas de Bloom Alert.
+**ingestion_time** (TIMESTAMP): Estampa horaria que representa día en que se ingesto el dato a las bases de datos internas de Water data examination and Alert.
 
 ### organization_and_zones_dataset.csv
 **organization** (STRING): organización a la que corresponde el dato.

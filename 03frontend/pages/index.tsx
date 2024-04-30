@@ -65,7 +65,7 @@ export default function HomePage() {
         Welcome to your Dashboard<br/> 
         </h2>
         <div className="mb-4 mt-0 text-left font-mono text-sm text-slate-500">
-        by Bloom alert & Felipe Cabello<br /> Created using: Fastapi, Nextjs, Duckdb
+        by Water data examination and alert & Felipe Cabello<br /> Created using: Fastapi, Nextjs, Duckdb
       </div>
       <Divider> </Divider>
 
